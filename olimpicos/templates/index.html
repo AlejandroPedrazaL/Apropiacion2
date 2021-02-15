@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <title>Deportsitas</title>
     {% load static %}
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="/static/css/bulma.css" rel="stylesheet" />
@@ -37,21 +37,8 @@
       </div>
       <div class="hero-body">
         <div class="container has-text-centered">
-        <!--
-
-
-
-
-
-
-        Lo de adentro de este div es lo que toca modificar
-
-
-
-
-        
-        -->
-          <h3 align="center">Deportistas</h3>
+        <!-- Lo de adentro de este div es lo que toca modificar -->
+          <h3 class="title" align="center">Deportistas</h3>
           <div class="container">
             <div class="row">
               {% for deportista in deportistas_list %}
@@ -59,28 +46,90 @@
                 {% if deportista.image == None %}
 
                 <div class="card" style="width: 18rem">
-                  <img
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="/{{ deportista.foto }}" alt="Card image cap">
+                    </figure>
+                  </div>
+                  <!--<img
                     class="card-img-top"
                     alt="Card image cap"
                     src="{{deportista.foto}}"
-                  />
-                  <div class="card-body">
+                  />-->
+                  <!--<div class="card-body">
                     <h5 class="card-title">
                       {{ deportista.nombre }} {{ deportista.apellido }}
                     </h5>
                     <p class="card-text">{{ deportista.peso }}</p>
                     <a href="#" class="btn btn-primary">Mas información</a>
+                  </div>-->
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-content">
+                        <p class="title is-4"> {{ deportista.nombre }} {{ deportista.apellido }}</p>
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      {{ deportista.peso }}
+                    </div>
                   </div>
+                  <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Mas información</a>
+                  </footer>
                 </div>
                 {% else %}
                 <div class="card" style="width: 300px">
-                  <img
+                 <!-- <img
                     class="card-img-top"
                     alt="Card image cap"
                     style="height: 300px"
                     src="/{{ deportista.image }}"
-                  />
-                  <div class="card-body">
+                  />-->
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="/{{ deportista.image }}" alt="Card image cap">
+                    </figure>
+                  </div>
+
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-content">
+                        <p class="title is-4"> {{ deportista.nombre }} {{ deportista.apellido }}</p>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                      <div class="row">
+                        {% for participacion in participaciones_list %}
+                            {% if participacion.deportista.id == deportista.id %}
+
+                        <div class="col-sm">
+                          <div class="card-image">
+                            <figure class="image is-4by3">
+                              <img src="/{{participacion.deporte.icono }}" alt="Card image cap">
+                            </figure>
+                          </div>
+
+                          <div class="card-content">
+                            <div class="content">
+                              {{ participacion.deporte.nombre }}
+                            </div>
+                          </div>
+
+                          <footer class="card-footer">
+                            <a href="#" class="card-footer-item">Mas información</a>
+                          </footer>
+
+                        </div>
+
+                        {% endif %} {% endfor %}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!--<div class="card-body">
                     <h5 class="card-title">
                       {{ deportista.nombre }} {{ deportista.apellido }}
                     </h5>
@@ -104,6 +153,7 @@
                     </div>
                     <a href="#" class="btn btn-primary">Mas información</a>
                   </div>
+                  -->
                 </div>
                 {% endif %}
               </div>

@@ -1,17 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Title of the document</title>
+    <meta charset="UTF-8" />
+    <link href="/static/css/bulma.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>Agregar deportista</title>
 </head>
 
 <body>
-{% block content %}
-<form action="{%url 'deportista:addDeportista' %}" enctype="multipart/form-data" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Adicionar"/>
-</form>
-{% endblock %}
+<section class="hero is-fullheight is-dark">
+    <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <div class="navbar-end">
+                <a
+                  href="{% url 'deportista:deportistas' %}"
+                  class="navbar-item"
+                >
+                  Inicio
+                </a>
+                <a href="{% url 'deportista:loginUser' %}" class="navbar-item">
+                  Login
+                </a>
+                <a
+                  href="{% url 'deportista:registrarUsuario' %}"
+                  class="navbar-item"
+                >
+                  Sign Up
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="hero-body">
+        <div class="container has-text-centered">
+        <!-- Lo de adentro de este div es lo que toca modificar -->
+          <h3 class="title" align="center">Agregar Deportista</h3>
+        {% block content %}
+        <div class="box is-dark">
+          <form method="post" action="" onsubmit="return sendForm();">
+            <div class="field">
+              <div class="control">
+                {% csrf_token %}
+                {{ form.as_p }}
+              </div>
+            </div>
+          <div class="columns">
+              <div class="column is-half">
+                <input
+                  class="is-fullwidth button is-block is-info is-large"
+                  id="send"
+                  name="send"
+                  type="submit"
+                  value="Aceptar"
+                />
+              </div>
+              <div class="column is-half">
+                <a
+                  class="is-fullwidth button is-block is-danger is-large"
+                  href="http://127.0.0.1:8000/home/deportistas/"
+                  >Cancelar</a
+                >
+              </div>
+            </div>
+          </form>
+        </div>
+        {% endblock %}
+        </div>
+      </div>
+</section>
 </body>
 
 </html>
